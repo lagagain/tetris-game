@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="zh_TW">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>俄羅斯方塊</title>
+        <link rel="stylesheet" href="./rus.css" type="text/css"/>
+        <script src="http://localhost:4444/skewer"></script>
+        <script type='text/javascript' id='lt_ws' src='http://localhost:33288/socket.io/lighttable/ws.js'></script>
+        <script type="text/javascript" src="maxtrix.js"></script>
+        <script type="text/javascript" src="rus.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1 id="title">俄羅斯方塊</h1>
+        </header>
+        <div id="play_ground">
+            <table id="skip_ground">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <table id="main_ground">
+                <tr>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                </tr>
+            </table>
+            <table id="preview_ground">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
+
+
+
+
+
