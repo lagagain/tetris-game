@@ -1,0 +1,74 @@
+/********* global setting ***************/
+
+html{
+    background:#000;
+}
+
+#title{
+    color:yellow;
+    //width: 5.2em;
+    //margin: 5px auto;
+}
+
+/******* ground setting ****************/
+
+table *{
+    margin:0px;
+    padding:0px;
+}
+
+table td{
+    border:none;
+    position:relative;
+    background:white;
+    width:15px;
+    height:15px;
+    margin:5px;
+    padding:0px;
+}
+
+#play_ground{
+    width:100vm;
+    display:block;
+    margin:0px auto;
+}
+
+#play_ground > *{
+    float:left;
+    position:relative;
+}
+
+
+/*************** block setting **************/
+
+.block{
+    border-radius:3.2px;
+    box-shadow:gray 0px 0px 1.5px 2px;
+    border-style:none;
+}
+
+.red{
+    background-color:red;
+    box-shadow:#dd7755;
+}
+
+.orange{
+    background-color:orange;
+    box-shadow:#dd7755;
+}
+
+.green{
+    background-color:green;
+}
+
+.blue{
+    background-color:blue;
+}
+
+.dark_blue{
+    background-color:#208;
+}
+
+.gray{
+    background-color:gray;
+}
