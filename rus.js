@@ -342,13 +342,18 @@ function GroundObj(ground_maxtrix, width){
      /********** init object position **************/
      switch(type){
          case "square":
-            this.position[0] = ground.getIndex(2,start_position - 1);
-            this.position[1] = ground.getIndex(2,start_position);
-            this.position[2] = ground.getIndex(3,start_position - 1);
-            this.position[3] = ground.getIndex(3,start_position);
-            this.class += " green";
+                 // ##
+                 // ##
+                 this.position[0] = ground.getIndex(2,start_position - 1);
+                 this.position[1] = ground.getIndex(2,start_position);
+                 this.position[2] = ground.getIndex(3,start_position - 1);
+                 this.position[3] = ground.getIndex(3,start_position);
+                 this.class += " green";
                  break;
          case "blue_L":
+                 //  #
+                 //  #
+                 // ##
                  this.position[0] = ground.getIndex(1,start_position - 1);
                  this.position[1] = ground.getIndex(2,start_position - 1);
                  this.position[2] = ground.getIndex(3,start_position - 1);
@@ -356,6 +361,9 @@ function GroundObj(ground_maxtrix, width){
                  this.class += " dark_blue";
                  break;
          case "orange_L":
+                 // #
+                 // #
+                 // ##
                  this.position[0] = ground.getIndex(1,start_position);
                  this.position[1] = ground.getIndex(2,start_position);
                  this.position[2] = ground.getIndex(3,start_position);
@@ -363,6 +371,10 @@ function GroundObj(ground_maxtrix, width){
                  this.class += " orange";
                  break;
          case "straight":
+                 // #
+                 // #
+                 // #
+                 // #
                  this.position[0] = ground.getIndex(1,start_position);
                  this.position[1] = ground.getIndex(2,start_position);
                  this.position[2] = ground.getIndex(3,start_position);
@@ -462,6 +474,53 @@ blockObj.prototype.clean = function(){
     for(var i = 0;  i < this.position.length;  i++){
         this.ground[this.position[i]].setAttribute("class","");
     }
+}
+ /******************************
+  * blockObj's method: unclockRoto(times = 1)
+  * description: Roto block
+  * input: times
+  ******************************/
+blockObj.prototype.unclockRoto = function(times = 1){
+    var point_list = [];
+    var new_point_list = [];
+    for(index in this.position){
+        point_list.push( this.ground_obj.getPoint(this.position[index]) );
+    }
+    for(index in point_list){
+        new_point_list.push(unclockRoto(point_list[index], 90 * times, this.center_point));
+    }
+
+    //<DEBUG>
+    // for(var i1 in new_point_list){
+    //     console.log(new_point_list[i1]);
+    //}
+
+    /****** remember class, and clear block ********/ 
+    var className = this.ground[this.position[0]].className;
+    this.clean();
+
+    /************ change position *******************/
+    if(this.ground_obj.checkPoints(new_point_list)){
+        //console.log(new_point_list);
+        for(var index =0;  index < 4;  index++){
+            console.log("index = ",index,this.position.length);
+            this.position[index] = this.ground_obj.getIndex(new_point_list[index][0],new_point_list[index][1]);
+            //console.log(this.ground_obj.getIndex(new_point_list[index][0],new_point_list[index][1]));
+        }
+    }
+
+    /********* recover block ***********/
+    for(var index in this.position){
+        this.ground[this.position[index]].setAttribute("class",className);
+    }
+}
+ /******************************
+  * blockObj's method: clockRoto(times = 1)
+  * description: Roto block
+  * input: times
+  ******************************/
+blockObj.prototype.clockRoto = function(times = 1){
+    this.unclockRoto(3);
 }
     
  /******************************
