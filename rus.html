@@ -13,8 +13,11 @@
         <header>
             <h1 id="title">俄羅斯方塊</h1>
             <span id="options">
-                <input name="" type="button" value="START"></input>
-                <input name="" type="button" value=""></input>
+                <input name="" type="button" value="START" id="start_button"></input>
+                <input name="" type="button" value="CLEAN" id="clean_button"></input>
+            </span>
+            <span id="information">
+                <span id="score">分數</span>
             </span>
         </header>
         <div id="play_ground">
@@ -46,18 +49,18 @@
             </table>
             <table id="main_ground">
                 <tr>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
                 </tr>
                 <tr>
                     <td class="block gray"></td>
@@ -310,9 +313,32 @@
                     <td></td>
                 </tr>
             </table>
+            <aside id="manu">
+                <h2>操作說明</h2>
+                <pre class="org">                    
+                |-------+------------|
+                | 按鍵  | 說明       |
+                |-------+------------|
+                | Left  | 向左       |
+                | Right | 向右       |
+                | Down  | 向下       |
+                | KeyZ  | 旋轉       |
+                | KeyX  | 旋轉(反)   |
+                | Shift | 保留(skip) |
+                |-------+------------|
+                
+
+                </pre>
+                
+
+            </aside>
         </div>
     </body>
 </html>
+
+
+
+
 
 
 
