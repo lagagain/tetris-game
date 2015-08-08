@@ -17,7 +17,7 @@
 
  test_maxtrix = [0, 1];
 
- function unclockRoto(maxtrix, angle,center_point = [0, 0]){
+ function unclockRoto(maxtrix, angle,center_point){
     var new_maxtrix = [];
     angle = angle * Math.PI / 180;
 

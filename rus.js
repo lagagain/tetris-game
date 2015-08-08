@@ -90,22 +90,31 @@ window.onload=function(){
     /******* Event: window on keydown ***********/
     window.addEventListener("keydown", function(e){
         if(main_block_obj){
-            switch(e.code){
+            var key_code = (e.code)?e.code:e.keyCode;
+            switch(key_code){
+            case 37:
             case "ArrowLeft":
-                main_block_obj.left();
+                main_block_obj.left(1);
                 break;
+            case 39:
             case "ArrowRight":
-                main_block_obj.right();
+                main_block_obj.right(1);
                 break;
+            case 40:
             case "ArrowDown":
-                main_block_obj.down();
+                main_block_obj.down(1);
                 break;
+            case 90:
             case "KeyZ":
-                main_block_obj.clockRoto();
+            case 38:
+            case "ArrowUp":
+                main_block_obj.unclockRoto(1);
                 break;
+            case 88:
             case "KeyX":
-                main_block_obj.unclockRoto();
+                main_block_obj.clockRoto(1);
                 break;
+            case 16:
             case "ShiftLeft":
             case "ShiftRight":
                 skip_block();
@@ -113,7 +122,7 @@ window.onload=function(){
             default:
                 //DEBUG
                 //use in DEBUG
-                console.log(e.code);
+                console.log(key_code);
             }
         }
     })
@@ -144,7 +153,7 @@ window.onload=function(){
         /******** if yes, the block object down() ************/
         /******** if not, creat new block object if game is in playing ****************/
         if(main_block_obj){
-            main_block_obj.down();
+            main_block_obj.down(1);
         }else if(game_status == game_status_types["playing"]){
             /********* var & init varable in event ********************/
             var type_id = Math.floor(Math.random() * 100) % block_types.length;
@@ -155,10 +164,10 @@ window.onload=function(){
             /************* clean block object *************/
             /************* put block object in preview_ground *************/
             preview_ground_obj.clean();
-            new blockObj(preview_block_type, preview_ground_obj);
+            new blockObj(preview_block_type, preview_ground_obj,null);
 
             /****** get new block object to main_block_obj **********/
-            main_block_obj = new blockObj(type);
+            main_block_obj = new blockObj(type,main_ground_obj,null);
         }
         
         /****** view height_line *********/
@@ -397,7 +406,7 @@ function newMainGroundObj(ground){
              ******************************/
             raws2d_cnt[index] = 0;
         };
-        ground_obj.addRawsCnt=function(index, times=1){
+        ground_obj.addRawsCnt=function(index, times){
             /******************************
              * method name: addRawsCnt(index, times)
              * description: It plus raws2d_cnt[index] with times
@@ -410,7 +419,7 @@ function newMainGroundObj(ground){
             // DEBUG
             //console.log("index is", index,";  cnt is", raws2d_cnt[index]);
         };
-        ground_obj.addColsCnt=function(index, times=1){
+        ground_obj.addColsCnt=function(index, times){
             /******************************
              * method name: addColsCnt(index, times)
              * description: It plus cols2d_cnt[index] with times
@@ -420,7 +429,7 @@ function newMainGroundObj(ground){
              ******************************/
             cols2d_cnt[index]+=times;
         };
-        ground_obj.setRawsCnt=function(index, new_cnt=0){
+        ground_obj.setRawsCnt=function(index, new_cnt){
             /******************************
              * method name: setRawsCnt(index, new_cnt)
              * description: setting raws2d_cnt[index] with new_cnt
@@ -430,7 +439,7 @@ function newMainGroundObj(ground){
              ******************************/
             raws2d_cnt[index] = new_cnt;
         };
-        ground_obj.setColsCnt=function(index, new_cnt=0){
+        ground_obj.setColsCnt=function(index, new_cnt){
             /******************************
              * method name: setColsCnt(index, new_cnt)
              * description: setting cols2d_cnt[index] with new_cnt
@@ -557,7 +566,7 @@ function GroundObj(ground_maxtrix, width){
  * 
  * 
  **************************************/
- function blockObj(type="straight",ground=main_ground_obj,position=null){
+ function blockObj(type,ground,position){
      /********** var varable in function *****************/
      var ground_width = ground.width;
      if (ground === preview_ground_obj || ground === skip_ground_obj){
@@ -666,7 +675,7 @@ function GroundObj(ground_maxtrix, width){
   * description: move block left skip_cnt times
   * input: skip_cnt = 1
   ******************************/
- blockObj.prototype.left = function(skip_cnt=1){
+ blockObj.prototype.left = function(skip_cnt){
      var ground_obj = this.ground_obj;
      var ground = this.ground;
      var point_list = [];
@@ -699,7 +708,7 @@ function GroundObj(ground_maxtrix, width){
   * description: move block right skip_cnt times
   * input: skip_cnt = 1
   ******************************/
- blockObj.prototype.right = function(skip_cnt = 1){
+ blockObj.prototype.right = function(skip_cnt){
      return this.left(skip_cnt * (-1));
  }
  /******************************
@@ -707,7 +716,7 @@ function GroundObj(ground_maxtrix, width){
   * description: move block down skip_cnt times
   * input: skip_cnt = 1
   ******************************/
- blockObj.prototype.down = function(skip_cnt=1){
+ blockObj.prototype.down = function(skip_cnt){
      var ground_obj = this.ground_obj;
      var ground = this.ground;
      var point_list = [];
@@ -733,8 +742,8 @@ function GroundObj(ground_maxtrix, width){
          /********** if not, change status *******************/
          for(var index in point_list){
              var point = point_list[index];
-             ground_obj.addColsCnt(point[1]);
-             ground_obj.addRawsCnt(point[0]);
+             ground_obj.addColsCnt(point[1],1);
+             ground_obj.addRawsCnt(point[0],1);
              main_block_obj = null;
          }
      }
@@ -745,7 +754,7 @@ function GroundObj(ground_maxtrix, width){
      }
      
      /*********** check game status *************************/
-     checkGame();
+     checkGame([max_height,sum_cols-1], main_ground_obj);
 
      return null;
 }
@@ -765,7 +774,7 @@ blockObj.prototype.clean = function(){
   * description: Roto block
   * input: times
   ******************************/
-blockObj.prototype.unclockRoto = function(times = 1){
+blockObj.prototype.unclockRoto = function(times){
     /******************* var varable in method ************/
     var point_list = [];
     var new_point_list = [];
@@ -815,7 +824,7 @@ blockObj.prototype.unclockRoto = function(times = 1){
   * description: Roto block
   * input: times
   ******************************/
-blockObj.prototype.clockRoto = function(times = 1){
+blockObj.prototype.clockRoto = function(times){
     for(var i = 0;  i < 3 * times;  i++){
         this.unclockRoto(1);
     }
@@ -832,13 +841,13 @@ blockObj.prototype.way_map={
 };
     
 /******************************
- * function name: checkGame()
+ * function name: checkGame(point,ground_obj)
  * description: It will check game status include both overring height and filling lines
  * input: point,	//where start check.
          ground_obj	//which groundObj it at.
  * output: None
  ******************************/
-function checkGame(point=[max_height,sum_cols - 1],ground_obj = main_ground_obj){
+function checkGame(point,ground_obj){
     var cnt;
     var raws;
     
@@ -852,7 +861,7 @@ function checkGame(point=[max_height,sum_cols - 1],ground_obj = main_ground_obj)
         //console.log("check index cnt:",cnt);
         
         if(cnt >= full_width){
-            checkLines(i);
+            checkLines(i,ground_obj);
             break;
         }
     }
@@ -880,7 +889,7 @@ function checkGame(point=[max_height,sum_cols - 1],ground_obj = main_ground_obj)
  * output: None
  ******************************/
   
-function checkLines(raw,ground_obj = main_ground_obj){
+function checkLines(raw,ground_obj){
 
     var cnt;
     var raws;
@@ -987,13 +996,13 @@ function skip_block(){
 
     if(skip_block_type == ""){
         skip_block_type = main_block_obj.type;
-        new blockObj(skip_block_type, skip_ground_obj);
+        new blockObj(skip_block_type, skip_ground_obj,null);
         main_block_obj = null;
     }else{
         var type = skip_block_type;
         skip_block_type = main_block_obj.type;
-        new blockObj(skip_block_type, skip_ground_obj);
-        main_block_obj = new blockObj(type);
+        new blockObj(skip_block_type, skip_ground_obj,null);
+        main_block_obj = new blockObj(type,main_ground_obj,null);
         
     }
 
