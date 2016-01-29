@@ -28,9 +28,9 @@ var skip_ground_maxia;
 var main_ground_raws;
 var main_ground_cols;
 /******** setting const var **************/
-const max_height = 15;
-const sum_cols = 12;
-const full_width = sum_cols - 2;
+const max_height  = 15;
+const sum_cols    = 12;
+const full_width  = sum_cols - 2;
 const block_types = ["square",
                      "blue_L",
                      "orange_L",
@@ -40,7 +40,6 @@ const block_types = ["square",
                       "green_Z"];
 const game_status_types = {"stop":-1,
                            "playing":0};
-const down_speed = 700;	/* pms */
 /******** var obj *****************/
 var main_ground_obj;
 var preview_ground_obj;
@@ -49,9 +48,44 @@ var main_block_obj;
 /********* var other varable ****************/
 var start_button;
 var score;
-var game_status = game_status_types["stop"];
+var game_status        = game_status_types["stop"];
 var preview_block_type = "";
-var skip_block_type = "";
+var skip_block_type    = "";
+var down_speed         = 700;	/* pms */
+var gmain_loop         = null;
+/********** global function ****************/
+function gmain_loop_fun(){
+    /******** check main_blockObj is exist ************/
+    /******** if yes, the block object down() ************/
+    /******** if not, creat new block object if game is in playing ****************/
+    if(main_block_obj){
+        main_block_obj.down(1);
+    }else if(game_status == game_status_types["playing"]){
+        /********* var & init varable in event ********************/
+        var type_id = Math.floor(Math.random() * 100) % block_types.length;
+        var type    = preview_block_type;
+        /****** get new type of block to preview_ground ********/
+        preview_block_type = block_types[type_id];
+
+        /************* clean block object *************/
+        /************* put block object in preview_ground *************/
+        preview_ground_obj.clean();
+        new blockObj(preview_block_type, preview_ground_obj,null);
+
+        /****** get new block object to main_block_obj **********/
+        main_block_obj = new blockObj(type,main_ground_obj,null);
+    }
+
+    /****** view height_line *********/
+    var raws = main_ground_obj.getRaws(1);
+    for(var i in raws){
+        if(raws[i].className == ""){
+            raws[i].setAttribute("class","red");
+        }else if(raws[i].className == "red"){
+            raws[i].setAttribute("class","");
+        }
+    }
+}
 
 /***************************************
  * init when window loaded (get var value)
@@ -119,16 +153,25 @@ window.onload=function(){
             case "ShiftRight":
                 skip_block();
                 break;
+            case "Space":
+                while(main_block_obj){
+                    main_block_obj.down(1);
+                }
+                break;
             default:
                 //DEBUG
                 //use in DEBUG
                 console.log(key_code);
             }
         }
-    })
+    });
     /***********  Event: start_button on click *********/
     // <NORMAL>
-    start_button.addEventListener("click",function(){start();});
+    start_button.addEventListener("click",
+                                  function(e){
+                                      start_button.blur();
+                                      start();
+                                  });
     // <DEBUG>
     // start_button.addEventListener("click", function(e){
     //     var type_id = Math.floor(Math.random() * 100) % block_types.length;
@@ -148,54 +191,8 @@ window.onload=function(){
      * setting timers
      *********************/
     /*********** block auto down **************/
-    setInterval(function(){
-        /******** check main_blockObj is exist ************/
-        /******** if yes, the block object down() ************/
-        /******** if not, creat new block object if game is in playing ****************/
-        if(main_block_obj){
-            main_block_obj.down(1);
-        }else if(game_status == game_status_types["playing"]){
-            /********* var & init varable in event ********************/
-            var type_id = Math.floor(Math.random() * 100) % block_types.length;
-            var type = preview_block_type;
-            /****** get new type of block to preview_ground ********/
-            preview_block_type = block_types[type_id];
+    gmain_loop = setInterval(gmain_loop_fun,down_speed);
 
-            /************* clean block object *************/
-            /************* put block object in preview_ground *************/
-            preview_ground_obj.clean();
-            new blockObj(preview_block_type, preview_ground_obj,null);
-
-            /****** get new block object to main_block_obj **********/
-            main_block_obj = new blockObj(type,main_ground_obj,null);
-        }
-        
-        /****** view height_line *********/
-        var raws = main_ground_obj.getRaws(1);
-        for(var i in raws){
-            if(raws[i].className == ""){
-                raws[i].setAttribute("class","red");
-            }else if(raws[i].className == "red"){
-                raws[i].setAttribute("class","");
-            }
-        }
-        
-        //<DEBUG>
-        /************ view raw2d_cnt **********************/
-        // var cols = main_ground_obj.getCols(full_width + 1)// ;
-        // for(var i = 0;  i < cols.length;  i++){
-        //     cols[i].innerHTML = main_ground_obj.getRawsCnt(i);
-        // }
-
-        //<DEBUG>
-        /************ view col2d_cnt **********************/
-        // var raws = main_ground_obj.getRaws(max_height + 1);
-        // for(var i = 0;  i < raws.length;  i++){
-        //     raws[i].innerHTML = main_ground_obj.getColsCnt(i);
-        // }
-
-    },down_speed);
-    
     //<DEBUG>
     /************ view line_number **********************/
     // var cols = main_ground_obj.getCols(0);
@@ -210,20 +207,20 @@ window.onload=function(){
     //     raws[i].innerHTML = i;
     // }
 
-    
+
 }
 
 function start(){
-   
+
     init();
-    
+
     game_status = game_status_types["playing"];
 
     start_button.value = "restart";
 
-    
+
 }
-    
+
 /***********************
  * init game setting
  ***********************/
@@ -232,13 +229,14 @@ function init(){
     /************** get new type of block to preview_block_type ***************/
     var type_id = Math.floor(Math.random() * 100) % block_types.length;
     preview_block_type = block_types[type_id];
-    
+
     /******************************
      * Reset some varable and status.
      *
      ******************************/
     /*** reset score ****/
     score.innerHTML = "0";
+    down_speed      = 700; /* pms */
     for(var i = 1;  i < max_height + 1;  i++){
         /******* reset raw2d_cnt **********/
         main_ground_obj.cleanRawsCnt(i);
@@ -251,14 +249,14 @@ function init(){
     /************* clean block object in ground *********************/
     preview_ground_obj.clean();
     skip_ground_obj.clean();
-    
+
     for(var i = 0;  i < sum_cols;  i++){
         /****** reset col2d_cnt *******/
         main_ground_obj.cleanColsCnt(i);
         console.log("prepare2......", i );
     }
 }
-    
+
 /************************************
  * function name: newMainGroundObj
  * input: ground //it is the ground where this obj
@@ -369,7 +367,7 @@ function newMainGroundObj(ground){
              ******************************/
             return raws2d[index];
         }
-        
+
         ground_obj.getColsCnt=function(index){
             /******************************
              * method name: getColsCnt(index)
@@ -415,7 +413,7 @@ function newMainGroundObj(ground){
              * output: None
              ******************************/
             raws2d_cnt[index]+=times;
-            
+
             // DEBUG
             //console.log("index is", index,";  cnt is", raws2d_cnt[index]);
         };
@@ -465,7 +463,7 @@ function newMainGroundObj(ground){
             }
             return true;
         };
-        
+
         return ground_obj;
     }
     return obj();
@@ -527,7 +525,7 @@ function GroundObj(ground_maxtrix, width){
         var y = (index - x) / width;
         return [y, x];
     };
-    
+
     this.checkPoints=function(point_list){
         /******************************
          * method name: checkPoints(point_list)
@@ -543,8 +541,8 @@ function GroundObj(ground_maxtrix, width){
             }
         }
         return true;
-    }
-    
+    };
+
 }
 
 /*******************************
@@ -653,7 +651,7 @@ function GroundObj(ground_maxtrix, width){
                  this.class += " light_green";
                  break;
      }
-     
+
      /////////////////////// check start position can put .////////////
      if(this.ground_obj === main_ground_obj){
          for(var i = 0; i < this.position.length;  i++){
@@ -664,7 +662,7 @@ function GroundObj(ground_maxtrix, width){
              return null;
          }
      }
-     
+
      /********** make the object visiable ************/
      for(var index in this.position){
          this.ground[this.position[index]].setAttribute("class",this.class);
@@ -747,12 +745,12 @@ function GroundObj(ground_maxtrix, width){
              main_block_obj = null;
          }
      }
-     
+
      /******** recover the block can see **********/
      for(var i = 0;  i < this.position.length;  i++){
          this.ground[this.position[i]].setAttribute("class", this.class);
      }
-     
+
      /*********** check game status *************************/
      checkGame([max_height,sum_cols-1], main_ground_obj);
 
@@ -839,7 +837,7 @@ blockObj.prototype.way_map={
     "left" : 1,
     "right" : 3
 };
-    
+
 /******************************
  * function name: checkGame(point,ground_obj)
  * description: It will check game status include both overring height and filling lines
@@ -850,22 +848,22 @@ blockObj.prototype.way_map={
 function checkGame(point,ground_obj){
     var cnt;
     var raws;
-    
+
 
 
     /********** check all raws ******/
     for(var i = max_height; i > 0; i--){
         cnt = ground_obj.getRawsCnt(i);
-        
+
         //DEBUG
         //console.log("check index cnt:",cnt);
-        
+
         if(cnt >= full_width){
             checkLines(i,ground_obj);
             break;
         }
     }
-    
+
     /********** check all cols (height) **********/
     raws = ground_obj.getRaws(0);
     for(var index in raws){
@@ -888,12 +886,12 @@ function checkGame(point,ground_obj){
  		ground_obj	// which groundObj it at.
  * output: None
  ******************************/
-  
+
 function checkLines(raw,ground_obj){
 
     var cnt;
     var raws;
-    
+
     /****** hide height_line *********/
     raws = main_ground_obj.getRaws(1);
     for(var i in raws){
@@ -901,7 +899,7 @@ function checkLines(raw,ground_obj){
             raws[i].setAttribute("class","");
         }
     }
-    
+
     /********** check raw and record need move times *******************/
     if(raw == 0){
         return 0;
@@ -916,7 +914,7 @@ function checkLines(raw,ground_obj){
                        index == sum_cols - 1){
                         continue;
                     }
-                    
+
                     // DEGUG
                     //console.log(i, cnt);
                     //raws[index].setAttribute("class","");
@@ -924,10 +922,20 @@ function checkLines(raw,ground_obj){
                     //ground_obj.cleanRawsCnt(index);
                 }
                 need_times++;
-                
+
                 // plus score
                 score.innerHTML = Number(score.innerHTML) + 1;
-                
+                /******************************* check and update game level  *******************/
+                 if(Number(score.innerHTML) > 20 &&
+                    down_speed > 0){
+                     var p            = Math.floor(Number(score.innerHTML) / 20);
+                     var new_interval = down_speed - (20 * p);
+                     if(new_interval > 0){
+                         clearInterval(gmain_loop);
+                         gmain_loop = setInterval(gmain_loop_fun, new_interval);
+                     }
+                 }
+
             }else{
                 checkLines(i - 1, ground_obj);
                 break;
@@ -1007,3 +1015,6 @@ function skip_block(){
     }
 
 }
+
+
+
