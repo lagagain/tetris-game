@@ -1,3 +1,4 @@
+Unknown remote command: hg
 <!doctype html>
 <html lang="zh_TW">
     <head>
@@ -315,6 +316,33 @@
             </table>
             <aside id="manu">
                 <h2>操作說明</h2>
+                <div id="keybroad" style="font:16pt">
+                    <table>
+                        <tr>
+                            <td></td>
+                            <td>
+                    <button onclick="javascript:main_block_obj.clockRoto(1);">↑</button>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                    <button onclick="javascript:main_block_obj.left(1);">←</button>
+                            </td>
+                            <td></td>
+                            <td>
+                    <button onclick="javascript:main_block_obj.right(1);">→</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                    <button onclick="javascript:main_block_obj.down(1);">↓</button>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
                 <pre class="org">
 |-----------+------------|
 | 按鍵      | 說明       |
@@ -333,5 +361,6 @@
         </div>
     </body>
 </html>
+
 
 
