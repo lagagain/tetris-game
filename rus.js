@@ -239,11 +239,11 @@ function init(){
     /*** reset timer ***/
     down_speed      = 700; /* pms */
     if(gmain_loop){
-        clearInterval(gmain_loop)
+        clearInterval(gmain_loop);
     }
     gmain_loop = setInterval(gmain_loop_fun,down_speed);
-    
-    for(var i = 1;  i < max_height + 1;  i++){
+
+    for(var i = 0;  i < max_height + 1;  i++){
         /******* reset raw2d_cnt **********/
         main_ground_obj.cleanRawsCnt(i);
         for(var i2 = 1;  i2 < sum_cols - 1;  i2++){
@@ -1021,6 +1021,7 @@ function skip_block(){
     }
 
 }
+
 
 
 
