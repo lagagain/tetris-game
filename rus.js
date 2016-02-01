@@ -236,7 +236,13 @@ function init(){
      ******************************/
     /*** reset score ****/
     score.innerHTML = "0";
+    /*** reset timer ***/
     down_speed      = 700; /* pms */
+    if(gmain_loop){
+        clearInterval(gmain_loop)
+    }
+    gmain_loop = setInterval(gmain_loop_fun,down_speed);
+    
     for(var i = 1;  i < max_height + 1;  i++){
         /******* reset raw2d_cnt **********/
         main_ground_obj.cleanRawsCnt(i);
@@ -356,7 +362,7 @@ function newMainGroundObj(ground){
              * output: cols // a list include boxs these are in the col
              ******************************/
             return cols2d[index];
-        }
+        };
 
         ground_obj.getRaws = function(index){
             /******************************
@@ -366,7 +372,7 @@ function newMainGroundObj(ground){
              * output: raws // a list include boxs these are in the col
              ******************************/
             return raws2d[index];
-        }
+        };
 
         ground_obj.getColsCnt=function(index){
             /******************************
