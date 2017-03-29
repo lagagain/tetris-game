@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8"/>
         <title>俄羅斯方塊</title>
+        <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
         <link rel="stylesheet" href="./rus.css" type="text/css"/>
         <script src="http://localhost:4444/skewer"></script>
         <script type='text/javascript' id='lt_ws' src='http://localhost:33288/socket.io/lighttable/ws.js'></script>
@@ -13,335 +14,16 @@
         <header>
             <h1 id="title">俄羅斯方塊</h1>
             <span id="options">
-                <input name="" type="button" value="START" id="start_button">
+                <input name="" class="pure-button" type="button" value="START" id="start_button">
             </span>
             <span id="information">
                 <span id="score">分數</span>
             </span>
         </header>
-        <div id="play_ground">
-            <table id="skip_ground">
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-            <table id="main_ground">
-                <tr>
-                    <td class="block gray"></td>
-                    <td class=""></td>
-                    <td class=""></td>
-                    <td class=""></td>
-                    <td class=""></td>
-                    <td class=""></td>
-                    <td class=""></td>
-                    <td class=""></td>
-                    <td class=""></td>
-                    <td class=""></td>
-                    <td class=""></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="block gray"></td>
-                </tr>
-                <tr>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                    <td class="block gray"></td>
-                </tr>
-            </table>
-            <table id="preview_ground">
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-            <aside id="manu">
-                <h2>操作說明</h2>
-                <div id="keybroad" style="font:16pt">
-                    <table>
-                        <tr>
-                            <td></td>
-                            <td>
-                    <button onclick="javascript:main_block_obj.clockRoto(1);">↑</button>
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                    <button onclick="javascript:main_block_obj.left(1);">←</button>
-                            </td>
-                            <td></td>
-                            <td>
-                    <button onclick="javascript:main_block_obj.right(1);">→</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                    <button onclick="javascript:main_block_obj.down(1);">↓</button>
-                            </td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </div>
-                <pre class="org">
+        
+        <aside id="contral_table">
+            
+            <pre class="org">
 |-----------+-------------------|
 | 按鍵      | 說明              |
 |-----------+-------------------|
@@ -354,10 +36,332 @@
 | Space     | 直接落下(Firefox) |
 |-----------+-------------------|
 
-                </pre>
-
-            </aside>
+            </pre>
+        </aside>
+        <div id="play_ground">
+            <table id="skip_ground" class="pure-table-horizontal">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <table id="main_ground" class="pure-table-horizontal">
+                <tr>
+                    <td class="block gray"></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class=""></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="block gray"></td>
+                </tr>
+                <tr>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                    <td class="block gray"></td>
+                </tr>
+            </table>
+            <table id="preview_ground" class="pure-table-horizontal">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
         </div>
+        <aside id="manu">
+            <h2>操作說明</h2>
+            <div id="keybroad">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>
+                <button class="button-xlarge pure-button" onclick="javascript:main_block_obj.clockRoto(1);">↑</button>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                <button class="button-xlarge pure-button" onclick="javascript:main_block_obj.left(1);">←</button>
+                        </td>
+                        <td></td>
+                        <td>
+                <button class="button-xlarge pure-button" onclick="javascript:main_block_obj.right(1);">→</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                <button class="button-xlarge pure-button" onclick="javascript:main_block_obj.down(1);">↓</button>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </aside>
     </body>
 </html>
 
