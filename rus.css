@@ -1,40 +1,34 @@
 /********* global setting ***************/
 
-html{
-    background:#000;
-    color:white;
-}
-
-#title{
-    color:yellow;
-    //width: 5.2em;
-    //margin: 5px auto;
-}
-
 /******* Layout *************/
-#manu{
-    margin:0em 2ex;
+#main_body{
+     background: none;
 }
 
 table{
     margin:0em 1.5px;
 }
 
-/******* ground setting ****************/
+header{
+  padding-bottom: 2eM;
+  margin-bottom: 0.3ex;
+}
 
-table *{
-    margin:0px;
+#options{
+    margin-left: 2ex;
+}
+/******* ground setting ****************/
+td{
+    position:relative;
+    background:white;
+    width:1em;
+    height:1em;
+    margin:0.1ex;
     padding:0px;
 }
 
-table td{
-    border:none;
-    position:relative;
-    background:white;
-    width:15px;
-    height:15px;
-    margin:5px;
-    padding:0px;
+tr{
+  border: 1px solid yellow;
 }
 
 #man, #contral_table{
@@ -42,10 +36,12 @@ table td{
 }
 
 #play_ground{
-    width:100vm;
+    //width:100vm;
     display:block;
     float: left;
-    margin:0px auto;
+    padding: 1.2ex 2eM;
+    margin: 0px 1ex;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 #play_ground > *{
@@ -105,8 +101,26 @@ table td{
     background-color: gray;
 }
 
-#play_ground td{
-    border-bottom-width: 2px;
-    border-bottom-style: solid;
-    border-bottom-color: black;
+
+html{
+    color:white;
+    background-image:url("bg.jpg");
+    background-repeat: none;
+    background-size: cover;
+    background-color: radial-gradient(black, white)
+}
+
+#title{
+    color:yellow;
+    width: 100%;
+    text-align: center;
+}
+
+#contal_table_caption{
+  color: yellow;
+}
+
+aside{
+  background: rgba(180, 180, 180, 0.8);;
+  margin: 1ex 2eM;
 }
