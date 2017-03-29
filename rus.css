@@ -37,9 +37,14 @@ table td{
     padding:0px;
 }
 
+#man, #contral_table{
+    float: left;
+}
+
 #play_ground{
     width:100vm;
     display:block;
+    float: left;
     margin:0px auto;
 }
 
@@ -93,4 +98,15 @@ table td{
 
 .purple{
     background-color:purple;
+}
+
+/************ item setting *************/
+#keybroad td{
+    background-color: gray;
+}
+
+#play_ground td{
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
 }
