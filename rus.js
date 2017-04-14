@@ -996,7 +996,26 @@ function checkLines(raw,ground_obj){
  ******************************/
 function over(){
     game_status = game_status_types["stop"];
-    alert("Game Over\n" + "your scroe:" + score.innerHTML);
+    show_score();
+    //alert("Game Over\n" + "your scroe:" + score.innerHTML);
+}
+
+
+/****************************
+ * function name: show_score()/ hidden_score()
+ * description: When over game, these will show/hide message.
+ * output: None
+ ******************************/
+ function show_score(){
+     var bg = document.getElementById("black_bg");
+     var over_score = document.getElementById("over_score");
+     over_score.innerHTML = score.innerHTML;
+     bg.style.height = "100vh";
+ }
+
+function hidden_score(){
+     var bg = document.getElementById("black_bg");
+     bg.style.height = "0vh";
 }
 
 /****************************
