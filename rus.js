@@ -1,7 +1,7 @@
 /************************************************
  * Name:rus.js
  * Update Date: 2015/7/31
- * Author: WECODER
+ * Author: lagagain
  * Vertion: 0.9
  ************************************************/
 // it is start to a event that is window.onload

@@ -1,6 +1,6 @@
 /**************************
  * File Name: maxtrix.js
- * Author: WECODER
+ * Author: lagagain
  * Update date: 2015/7/30
  * Version: 0.01
  * Description: About Maxtrix function.  Using in web.
