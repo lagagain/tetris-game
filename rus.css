@@ -2,7 +2,10 @@
 
 /******* Layout *************/
 #main_body{
-     background: none;
+    background: none;
+    place-content: center;
+    place-items: start;
+    display: flex;
 }
 
 table{
@@ -12,6 +15,9 @@ table{
 header{
   padding-bottom: 2eM;
   margin-bottom: 0.3ex;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
 }
 
 #options{
@@ -36,7 +42,7 @@ tr{
 }
 
 #play_ground{
-    //width:100vm;
+    min-width: 360px;
     display:block;
     float: left;
     padding: 1.2ex 2eM;
